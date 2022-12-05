@@ -1,0 +1,103 @@
+
+.fund
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://gogo-react.coloredstrategies.com/static/media/balloon-lg.c94920d9.jpg');
+}
+
+.login-container{
+    margin-top: 15%;
+    background-color: white;
+}
+.login-form-1{
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+}
+.login-form-1 h3{
+    text-align: center;
+    color: #333;
+}
+.login-form-2{
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+    background: #0062cc;
+}
+.login-form-2 h3{
+    text-align: center;
+    color: #fff;
+}
+.login-container form{
+    padding: 10%;
+}
+.btnSubmit
+{
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    margin: 0px 10px;
+    margin-bottom: 2px;
+    margin-top: 1px
+}
+
+.btnSubmitLogin
+{
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    /* margin: 0px 10px; */
+    margin-bottom: 2px;
+    margin-top: 1px;
+    color: #fff;
+    background-color: #0062cc;
+    width: 200px;
+    height: 40px;
+    /* box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2) */
+}
+
+.btnLogin
+{
+ position: relative;
+ display: flex;
+ justify-content: space-between;
+}
+
+
+
+.login-form-1 .btnSubmit{
+    color: #fff;
+    background-color: #0062cc;
+}
+.login-form-2 .btnSubmit{
+    background-color: #fff;
+    color: #0062cc;
+}
+.login-form-2 .ForgetPwd{
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+.login-form-1 .ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+.btnSubmitLogin:disabled
+{
+    background: #ccc;
+}
+
+@media (max-width: 1400px)
+{
+    .btnSubmitLogin
+    {
+     width: 110px;
+     margin: 0px 10px;
+    }
+
+}
