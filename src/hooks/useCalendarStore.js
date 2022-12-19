@@ -7,11 +7,16 @@ import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent, savingNe
 export const useCalendarStore = () => {
   
     const dispatch = useDispatch();
-    const { uid } = useSelector( state => state.auth );
+    const { uid, displayName  } = useSelector( state => state.auth );
     const { events, activeEvent, isSaving } = useSelector( state => state.calendar );
 
     const setActiveEvent = ( calendarEvent ) => {
         dispatch( onSetActiveEvent( calendarEvent ) )
+    }
+
+    const user = {
+        name: displayName,
+        uid: uid
     }
 
     const startSavingEvent = async( calendarEvent ) => {
@@ -23,42 +28,16 @@ export const useCalendarStore = () => {
             dispatch( onUpdateEvent({ ...calendarEvent }) );
         } else {
             // Creando
-            // dispatch( onAddNewEvent({ ...calendarEvent, _id: new Date().getTime() }) );
+            const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/Expense` ) );
+            const setDocResp = await setDoc( newDoc, calendarEvent );
+
+            console.log({ newDoc, setDocResp });
+
+            dispatch( onAddNewEvent({ ...calendarEvent }) );
         }
     }
 
 
-    const startNewNote = async() => {
-       
-
-        dispatch( savingNewNote() );
-
-        // uid
-
-        const newNote = {
-            title: '',
-            notes: '',
-            date: new Date().getTime(),
-        }
-
-        const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/notes` ) );
-        const setDocResp = await setDoc( newDoc, newNote );
-
-        console.log({ newDoc, setDocResp });
-
-        newNote.id = newDoc.id;
-
-        //! dispatch
-        dispatch( onAddNewEvent({ newNote}) );
-        // dispatch( activarNote )
-
-       
-        
-    }
-
-    const startLoadingNotes = ( ) => {
-
-    }
 
     const startDeletingEvent = () => {
         // Todo: Llegar al backend
@@ -79,6 +58,5 @@ export const useCalendarStore = () => {
         startDeletingEvent,
         setActiveEvent,
         startSavingEvent,
-        startNewNote, 
     }
 }

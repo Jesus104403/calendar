@@ -179,7 +179,7 @@ export const CalendarModal = () => {
             <button
                 type="submit"
                 className="btn btn-outline-primary btn-block"
-                onClick={ onClickNewNote }
+                // onClick={ onClickNewNote }
                 disabled={ isSaving }
             >
                 <i className="far fa-save"></i>

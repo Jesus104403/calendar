@@ -4,6 +4,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { FirebaseAuth } from '../firebase/config';
 import { onLogin, onLogout } from '../store';
 
+import { startLoadingNotes } from '../store/calendar';
+
 
 export const useCheckAuth = () => {
  
@@ -14,9 +16,10 @@ export const useCheckAuth = () => {
 
       onAuthStateChanged( FirebaseAuth, async( user ) => {
         if( !user ) return dispatch( onLogout() );
+
         const { uid, email, displayName, photoURL } = user;
         dispatch( onLogin({  uid, email, displayName, photoURL }) );
-
+        dispatch( startLoadingNotes() );
       })
     }, []);
 
