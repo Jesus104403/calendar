@@ -11,6 +11,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { useDispatch } from 'react-redux';
+import { startSaveNote } from '../../store/calendar';
 
 
 registerLocale( 'es', es );
@@ -31,10 +33,11 @@ Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
 
-    const { startNewNote, isSaving } =  useCalendarStore();
+    const dispatch = useDispatch();
+    const {  isSaving } =  useCalendarStore();
 
     const { isDateModalOpen, closeDateModal } = useUiStore();
-    const { activeEvent, startSavingEvent } = useCalendarStore();
+    const { activeEvent, setActiveEvent, startSavingEvent } = useCalendarStore();
 
     const [ formSubmitted, setFormSubmitted ] = useState(false);
 
@@ -45,9 +48,7 @@ export const CalendarModal = () => {
         end: addHours( new Date(), 2),
     });
 
-    const onClickNewNote = () => {
-        startNewNote();
-    }
+   
 
     const titleClass = useMemo(() => {
         if ( !formSubmitted ) return '';
@@ -64,6 +65,11 @@ export const CalendarModal = () => {
       }    
       
     }, [ activeEvent ])
+    
+    useEffect(() => {
+        setActiveEvent(formValues);
+    }, [formValues])
+    
     
 
 
@@ -106,6 +112,9 @@ export const CalendarModal = () => {
         setFormSubmitted(false);
     }
 
+    const onSaveNote = () => {
+        dispatch( startSaveNote() );
+    }
 
 
   return (
@@ -179,7 +188,7 @@ export const CalendarModal = () => {
             <button
                 type="submit"
                 className="btn btn-outline-primary btn-block"
-                // onClick={ onClickNewNote }
+                onClick={ onSaveNote }
                 disabled={ isSaving }
             >
                 <i className="far fa-save"></i>

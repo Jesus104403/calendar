@@ -1,7 +1,8 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { FirebaseDB } from '../firebase/config';
-import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent, savingNewNote } from '../store';
+import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from '../store';
 
 
 export const useCalendarStore = () => {
@@ -20,21 +21,29 @@ export const useCalendarStore = () => {
     }
 
     const startSavingEvent = async( calendarEvent ) => {
-        // TODO: llegar al backend
+       
+        try {
 
-        // Todo bien
-        if( calendarEvent._id ) {
-            // Actualizando
-            dispatch( onUpdateEvent({ ...calendarEvent }) );
-        } else {
-            // Creando
-            const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/Expense` ) );
-            const setDocResp = await setDoc( newDoc, calendarEvent );
-
-            console.log({ newDoc, setDocResp });
-
-            dispatch( onAddNewEvent({ ...calendarEvent }) );
+            if( calendarEvent.id ) {
+                // Actualizando
+                dispatch( onUpdateEvent({ ...calendarEvent, user }) );
+                return;
+            } 
+    
+                // Creando
+                const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/Expense` ) );
+                const setDocResp = await setDoc( newDoc, calendarEvent );
+    
+                console.log({ newDoc, setDocResp });
+    
+                dispatch( onAddNewEvent({ ...calendarEvent }) );
+            
+        } catch (error) {
+            console.log(error);
+            Swal.fire('Error al guardar', error.response.data.msg, 'error');
         }
+
+        
     }
 
 

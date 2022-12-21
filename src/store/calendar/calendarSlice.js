@@ -25,9 +25,7 @@ export const calendarSlice = createSlice({
         activeEvent: null,
     },
     reducers: {
-        savingNewNote: ( state ) => {
-             state.isSaving = true;
-        },
+        
         onSetActiveEvent: ( state, { payload }) => {
             state.activeEvent = payload;
         },
@@ -36,17 +34,20 @@ export const calendarSlice = createSlice({
             state.activeEvent = null;
         },
         onUpdateEvent: ( state, { payload } ) => {
+            state.isLoadingEvents = false;
             state.events = state.events.map( event => {
-                if ( event._id === payload._id ) {
+                if ( event.id === payload.id ) {
                     return payload;
                 }
 
                 return event;
             });
+
+            //Todo: Mostrar mensaje de actualizacion
         },
         onDeleteEvent: ( state ) => {
             if ( state.activeEvent ) {
-                state.events = state.events.filter( event => event._id !== state.activeEvent._id );
+                state.events = state.events.filter( event => event.id !== state.activeEvent.id );
                 state.activeEvent = null;
             }
         },
@@ -60,10 +61,11 @@ export const calendarSlice = createSlice({
                 }
             });
 
-        }
+        },
+       
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, savingNewNote,  onLoadEvents } = calendarSlice.actions;
+export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, onLoadEvents } = calendarSlice.actions;

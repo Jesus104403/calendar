@@ -1,5 +1,8 @@
+
+import { doc, setDoc } from 'firebase/firestore/lite';
+import { FirebaseDB } from '../../firebase/config';
 import { loadNotes } from '../../helpers';
-import { onLoadEvents } from './calendarSlice';
+import { onLoadEvents, onUpdateEvent } from './calendarSlice';
 
 
 
@@ -19,3 +22,27 @@ export const startLoadingNotes = () => {
 
     }
 }
+
+
+export const startSaveNote = () => {
+    return async( dispatch, getState ) => {
+
+
+      const { uid } = getState().auth;
+      const { activeEvent:note } = getState().calendar;
+
+      const noteToFireStore = { ...note };
+      delete noteToFireStore.id;
+
+      const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ note.id }`);
+      await setDoc( docRef, noteToFireStore, { merge: true });
+
+      dispatch( onUpdateEvent( note ) );
+
+
+
+    }
+
+}
+
+
