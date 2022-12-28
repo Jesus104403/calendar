@@ -1,8 +1,9 @@
 
-import { doc, setDoc } from 'firebase/firestore/lite';
+
+import { deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from '../../firebase/config';
 import { loadNotes } from '../../helpers';
-import { onLoadEvents, onUpdateEvent } from './calendarSlice';
+import { onDeleteEvent, onLoadEvents, onUpdateEvent } from './calendarSlice';
 
 
 
@@ -43,6 +44,21 @@ export const startSaveNote = () => {
 
     }
 
+}
+
+
+export const startDeletingNote = () => {
+    return async( dispatch, getState ) => {
+      const { uid } = getState().auth;
+      const { activeEvent:note } = getState().calendar;
+
+      const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ note.id }`);
+      await deleteDoc( docRef );  
+
+       dispatch( onDeleteEvent(note.id) );
+
+
+    }
 }
 
 

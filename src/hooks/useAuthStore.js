@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { loginWithEmailPassword, logoutFirebase, registeUserWithEmailPassword, singInWithGoogle } from '../firebase/providers';
+import { onLogoutCalendar } from '../store';
 import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store/auth/authSlice';
 
 export const useAuthStore = () => {
@@ -44,7 +45,7 @@ export const useAuthStore = () => {
     const startLogout = async() => {
 
           await logoutFirebase(); 
-
+          dispatch( onLogoutCalendar() );
           dispatch( onLogout() );
 
     }

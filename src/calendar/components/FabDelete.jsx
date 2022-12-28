@@ -1,11 +1,14 @@
+import { useDispatch } from 'react-redux';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { startDeletingNote } from '../../store/calendar';
 
 export const FabDelete = () => {
 
+    const dispatch = useDispatch();
     const { startDeletingEvent, hasEventSelected } = useCalendarStore();
 
     const handleDelete = () => {
-        startDeletingEvent();
+        dispatch( startDeletingNote() );
     }
 
 
