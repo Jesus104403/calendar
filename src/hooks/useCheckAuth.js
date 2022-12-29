@@ -4,12 +4,13 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { FirebaseAuth } from '../firebase/config';
 import { onLogin, onLogout } from '../store';
 
-import { startLoadingNotes } from '../store/calendar';
+import { useCalendarStore } from './useCalendarStore';
 
 
 export const useCheckAuth = () => {
  
     const { status } = useSelector( state => state.auth );
+    const { startLoadingEvents } = useCalendarStore();
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -19,7 +20,7 @@ export const useCheckAuth = () => {
 
         const { uid, email, displayName, photoURL } = user;
         dispatch( onLogin({  uid, email, displayName, photoURL }) );
-        dispatch( startLoadingNotes() );
+        startLoadingEvents(uid);
       })
     }, []);
 

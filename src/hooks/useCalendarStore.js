@@ -1,8 +1,9 @@
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { FirebaseDB } from '../firebase/config';
-import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent } from '../store';
+import { loadNotes } from '../helpers';
+import { onAddNewEvent, onDeleteEvent, onLoadEvents, onSetActiveEvent, onUpdateEvent } from '../store';
 
 
 export const useCalendarStore = () => {
@@ -26,17 +27,27 @@ export const useCalendarStore = () => {
 
             if( calendarEvent.id ) {
                 // Actualizando
-                dispatch( onUpdateEvent({ ...calendarEvent, user }) );
+                const noteToFireStore = { ...activeEvent };
+                delete noteToFireStore.id;
+
+               const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ activeEvent.id }`);
+               await setDoc( docRef, noteToFireStore, { merge: true });
+
+                dispatch( onUpdateEvent( activeEvent ) );
                 return;
             } 
     
+             
+              const newCalendarEvent = { ...calendarEvent, user };
+              delete  newCalendarEvent.bgColor;
                 // Creando
                 const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/Expense` ) );
-                const setDocResp = await setDoc( newDoc, calendarEvent );
+                const setDocResp = await setDoc( newDoc, newCalendarEvent );
     
-                console.log({ newDoc, setDocResp });
+                // console.log({ newDoc, setDocResp });
+                console.log({newCalendarEvent})
     
-                dispatch( onAddNewEvent({ ...calendarEvent }) );
+                dispatch( onAddNewEvent({...calendarEvent, user}) );
             
         } catch (error) {
             console.log(error);
@@ -48,12 +59,24 @@ export const useCalendarStore = () => {
 
 
 
-    const startDeletingEvent = () => {
+    const startDeletingEvent =  async() => {
         // Todo: Llegar al backend
+        const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ activeEvent.id }`);
+        await deleteDoc( docRef );  
+  
+         dispatch( onDeleteEvent(activeEvent.id) );
 
-
-        dispatch( onDeleteEvent() );
     }
+
+    const startLoadingEvents = async(uid) => {
+        if( !uid ) throw new Error('El UID del usuario no existe');
+
+        const events = await loadNotes( uid );
+        dispatch( onLoadEvents( events ) );
+  
+      }
+  
+  
 
 
     return {
@@ -67,5 +90,6 @@ export const useCalendarStore = () => {
         startDeletingEvent,
         setActiveEvent,
         startSavingEvent,
+        startLoadingEvents,
     }
 }

@@ -11,8 +11,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
-import { useDispatch } from 'react-redux';
-import { startSaveNote } from '../../store/calendar';
+
+
 
 
 registerLocale( 'es', es );
@@ -33,7 +33,7 @@ Modal.setAppElement('#root');
 
 export const CalendarModal = () => {
 
-    const dispatch = useDispatch();
+   
     const {  isSaving } =  useCalendarStore();
 
     const { isDateModalOpen, closeDateModal } = useUiStore();
@@ -112,10 +112,7 @@ export const CalendarModal = () => {
         setFormSubmitted(false);
     }
 
-    const onSaveNote = () => {
-        dispatch( startSaveNote() );
-    }
-
+   
 
   return (
     <Modal
@@ -188,7 +185,6 @@ export const CalendarModal = () => {
             <button
                 type="submit"
                 className="btn btn-outline-primary btn-block"
-                onClick={ onSaveNote }
                 disabled={ isSaving }
             >
                 <i className="far fa-save"></i>
