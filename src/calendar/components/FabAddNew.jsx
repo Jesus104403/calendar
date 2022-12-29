@@ -9,7 +9,7 @@ export const FabAddNew = () => {
 
     const handleClickNew = () => {
         setActiveEvent({
-            title: '',
+            amount: '',
             notes: '',
             start: new Date(),
             end: addHours( new Date(), 2 ),

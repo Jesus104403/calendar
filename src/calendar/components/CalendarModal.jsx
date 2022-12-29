@@ -15,6 +15,7 @@ import { useCalendarStore, useUiStore } from '../../hooks';
 
 
 
+
 registerLocale( 'es', es );
 
 
@@ -42,7 +43,7 @@ export const CalendarModal = () => {
     const [ formSubmitted, setFormSubmitted ] = useState(false);
 
     const [formValues, setFormValues] = useState({
-        title: '',
+        amount: '',
         notes: '',
         start: new Date(),
         end: addHours( new Date(), 2),
@@ -50,14 +51,14 @@ export const CalendarModal = () => {
 
    
 
-    const titleClass = useMemo(() => {
-        if ( !formSubmitted ) return '';
+    // const titleClass = useMemo(() => {
+    //     if ( !formSubmitted ) return '';
 
-        return ( formValues.title.length > 0 )
-            ? ''
-            : 'is-invalid';
+    //     return ( formValues.amount.length > 0 )
+    //         ? ''
+    //         : 'is-invalid';
 
-    }, [ formValues.title, formSubmitted ])
+    // }, [ formValues.amount, formSubmitted ])
 
     useEffect(() => {
       if ( activeEvent !== null ) {
@@ -66,9 +67,9 @@ export const CalendarModal = () => {
       
     }, [ activeEvent ])
     
-    useEffect(() => {
-        setActiveEvent(formValues);
-    }, [formValues])
+    // useEffect(() => {
+    //     setActiveEvent(formValues);
+    // }, [formValues])
     
     
 
@@ -101,13 +102,24 @@ export const CalendarModal = () => {
             Swal.fire('Fechas incorrectas','Revisar las fechas ingresadas','error');
             return;
         }
+
         
-        if ( formValues.title.length <= 0 ) return;
+
+        const amount = parseInt(formValues.amount);
         
-        console.log(formValues);
+
+        const newFormValues = {
+            ...formValues,  amount
+
+        } 
+
+        
+        
+    
+        console.log(   newFormValues );
 
         // TODO: 
-        await startSavingEvent( formValues );
+        await startSavingEvent(  newFormValues );
         closeDateModal();
         setFormSubmitted(false);
     }
@@ -158,12 +170,12 @@ export const CalendarModal = () => {
             <div className="form-group mb-2">
                 <label>Amount</label>
                 <input 
-                    type="text" 
-                    className={ `form-control ${ titleClass }`}
-                    placeholder="Título del evento"
-                    name="title"
+                    type="number" 
+                    className={ `form-control`}
+                    placeholder="$0"
+                    name="amount"
                     autoComplete="off"
-                    value={ formValues.title }
+                    value={ formValues.amount }
                     onChange={ onInputChanged }
                 />
                 <small id="emailHelp" className="form-text text-muted">Description(Optional) </small>

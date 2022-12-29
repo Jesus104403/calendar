@@ -27,27 +27,30 @@ export const useCalendarStore = () => {
 
             if( calendarEvent.id ) {
                 // Actualizando
-                const noteToFireStore = { ...activeEvent };
+                const noteToFireStore = { ...calendarEvent };
                 delete noteToFireStore.id;
+                
 
-               const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ activeEvent.id }`);
+               const docRef = doc( FirebaseDB, `${ uid }/calendar/Expense/${ calendarEvent.id }`);
                await setDoc( docRef, noteToFireStore, { merge: true });
 
-                dispatch( onUpdateEvent( activeEvent ) );
+                dispatch( onUpdateEvent( calendarEvent, user ) );
                 return;
             } 
     
-             
-              const newCalendarEvent = { ...calendarEvent, user };
-              delete  newCalendarEvent.bgColor;
+              
+
+                const newCalendarEvent = { ...calendarEvent, user };
+                delete  newCalendarEvent.bgColor;
+              
                 // Creando
                 const newDoc = doc( collection( FirebaseDB,  `${ uid }/calendar/Expense` ) );
-                const setDocResp = await setDoc( newDoc, newCalendarEvent );
+                const setDocResp = await setDoc( newDoc,  newCalendarEvent );
     
                 // console.log({ newDoc, setDocResp });
-                console.log({newCalendarEvent})
+                console.log({ newCalendarEvent})
     
-                dispatch( onAddNewEvent({...calendarEvent, user}) );
+                dispatch( onAddNewEvent({... newCalendarEvent}) );
             
         } catch (error) {
             console.log(error);

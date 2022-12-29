@@ -1,16 +1,21 @@
+import { useCalendarStore } from "../../hooks";
 import { useAuthStore } from "../../hooks/useAuthStore";
 
 
 export const Navbar = () => {
 
     const { displayName, startLogout } = useAuthStore();
+    const { events } = useCalendarStore();
 
     const onLogout = () => {
         startLogout();
     }
+  
+    // console.log(events[0].amount)
 
 
-
+    // const income = events[0].amount;
+    
   return (
     <>
     
@@ -63,7 +68,7 @@ export const Navbar = () => {
             <div className="email">
                <i className="fa-solid fa-bolt"></i>
                 &nbsp;
-                <span>30,500</span>
+                <span>1,443</span>
             </div>
             <div className="call">
               <i className="fa-solid fa-bolt"></i>
