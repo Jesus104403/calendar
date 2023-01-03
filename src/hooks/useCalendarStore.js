@@ -78,6 +78,34 @@ export const useCalendarStore = () => {
         dispatch( onLoadEvents( events ) );
   
       }
+
+    const startMoreIncome  = () => {
+        let suma = 0;
+
+        const amount = events.map(event =>{
+              const numeros = event.amount;
+              
+            //   numeros.forEach(item =>{
+            //      suma += item;
+            //   });
+
+            
+            return numeros;
+        })
+        // console.log(mas);
+
+        // const numeros = events.amount;
+        amount.forEach(item =>{
+            suma += item;
+         });
+
+         
+        return suma;
+
+        
+
+
+    }
   
   
 
@@ -94,5 +122,6 @@ export const useCalendarStore = () => {
         setActiveEvent,
         startSavingEvent,
         startLoadingEvents,
+        startMoreIncome
     }
 }
