@@ -50,17 +50,17 @@ export const Navbar = () => {
             <div className="email">
             <i className="fa-sharp fa-solid fa-circle-plus"></i>
                 &nbsp;
-                <span>Income</span>
+                <span>Ingresos</span>
             </div>
             <div className="call">
                <i className="fa-solid fa-minus"></i>
                &nbsp;
-                <span>Expense</span>
+                <span> Gastos </span>
             </div>
             <div className="call">
             <i className="fa-solid fa-square-poll-vertical"></i>
                &nbsp;
-                <span>Balance</span>
+                <span>Saldo</span>
             </div>      
         </div>
       

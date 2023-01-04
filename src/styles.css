@@ -522,3 +522,13 @@ color: white;
      min-width: 40px;
    }
 }
+
+.expense {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 50px; */
+  
+}
+
+

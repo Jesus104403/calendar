@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { addHours, differenceInSeconds } from 'date-fns';
 
+
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -11,6 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import es from 'date-fns/locale/es';
 import { useCalendarStore, useUiStore } from '../../hooks';
+import { ToggleSwitch } from './ToggleSwitch';
 
 
 
@@ -48,6 +50,8 @@ export const CalendarModal = () => {
         start: new Date(),
         end: addHours( new Date(), 2),
     });
+
+    const [toggled, setToggled] = useState(false);
 
    
 
@@ -134,13 +138,18 @@ export const CalendarModal = () => {
         className="modal animate__animated animate__fadeIn animate__faster"
         overlayClassName="modal-fondo"
         closeTimeoutMS={ 200 }
-    >
-        <h1> Add Expense</h1>
-        <hr />
+    >   
+         <div className='expense'>
+            <h1> Añadir gastos </h1>
+            <ToggleSwitch onChange={(event) => setToggled(event.target.checked) } />
+            <hr />
+
+         </div>
+            <p>The switch is {toggled ? 'on' : 'off'}.</p>
         <form className="container" onSubmit={ onSubmit }>
 
             <div className="form-group mb-2">
-                <label>Date</label>
+                <label>Fecha</label>
                 <DatePicker 
                     selected={ formValues.start }
                     onChange={ (event) => onDateChanged(event, 'start') }
@@ -168,7 +177,7 @@ export const CalendarModal = () => {
 
             <hr />
             <div className="form-group mb-2">
-                <label>Amount</label>
+                <label>Importe</label>
                 <input 
                     type="number" 
                     className={ `form-control`}
