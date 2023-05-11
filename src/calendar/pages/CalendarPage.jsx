@@ -5,21 +5,24 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete, Footer} from '../';
 
 import { localizer, getMessagesES } from '../../helpers';
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 
 
 export const CalendarPage = () => {
-
+  
   const { openDateModal } = useUiStore();
   const { events, setActiveEvent } = useCalendarStore();
 
   const [ lastView, setLastView ] = useState(localStorage.getItem('lastView') || 'week' );
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
+   
+   
+    //  console.log(event.ingresos);
 
     const style = {
-      backgroundColor: '#04B404',
+      backgroundColor: event.ingresos ? '#04B404' : '#FF0000',
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white'

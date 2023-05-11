@@ -81,24 +81,23 @@ export const useCalendarStore = () => {
 
     const startMoreIncome  = () => {
         let suma = 0;
-
         const amount = events.map(event =>{
-              const numeros = event.amount;
-              
-            //   numeros.forEach(item =>{
-            //      suma += item;
-            //   });
-
+            const numeros = event.amount;
             
-            return numeros;
-        })
-        // console.log(mas);
-
+            //   numeros.forEach(item =>{
+                //      suma += item;
+                //   });
+                
+                
+                return numeros;
+            })
+            console.log(amount);
+        
         // const numeros = events.amount;
         amount.forEach(item =>{
             suma += item;
-         });
-
+        });
+        
          
         return suma;
 

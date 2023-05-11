@@ -109,21 +109,32 @@ export const CalendarModal = () => {
 
         
 
-        const amount = parseInt(formValues.amount);
-        
+        const ingresos = parseInt(formValues.amount);
+        const gastos = parseInt(formValues.amount);
+
+      
+
+       
 
         const newFormValues = {
-            ...formValues,  amount
-
+            ...formValues,  gastos
         } 
-
         
+        const newFormValues2 = {
+            ...formValues,  ingresos
+        } 
         
+        if ( toggled === true){
+            console.log(   newFormValues );
+            return await startSavingEvent(  newFormValues );
+        }else{
+            console.log(   newFormValues2 );
+            await startSavingEvent(  newFormValues2 );
+        }
     
-        console.log(   newFormValues );
 
         // TODO: 
-        await startSavingEvent(  newFormValues );
+        // await startSavingEvent(  newFormValues );
         closeDateModal();
         setFormSubmitted(false);
     }
@@ -140,7 +151,7 @@ export const CalendarModal = () => {
         closeTimeoutMS={ 200 }
     >   
          <div className='expense'>
-            <h1> Añadir gastos </h1>
+            <h1>  {toggled ? 'Añadir Gastos' : 'Añadir Ingresos'} </h1>
             <ToggleSwitch onChange={(event) => setToggled(event.target.checked) } />
             <hr />
 
