@@ -6,7 +6,7 @@ import { useAuthStore } from "../../hooks/useAuthStore";
 export const Navbar = () => {
 
     const { displayName, startLogout } = useAuthStore();
-    const { startMoreIncome } = useCalendarStore();
+    const { startMoreIncome, startMoreExpense, startBalance  } = useCalendarStore();
 
     const onLogout = () => {
         startLogout();
@@ -75,12 +75,12 @@ export const Navbar = () => {
             <div className="call">
               <i className="fa-solid fa-bolt"></i>
                &nbsp;
-                <span>28,500</span>
+                <span>{startMoreExpense()}</span>
             </div>
             <div className="call">
             <i className="fa-solid fa-bolt"></i>
                &nbsp;
-                <span>-28,500</span>
+                <span>{startBalance()}</span>
             </div>      
         </div>
       

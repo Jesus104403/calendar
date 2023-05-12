@@ -82,16 +82,18 @@ export const useCalendarStore = () => {
     const startMoreIncome  = () => {
         let suma = 0;
         const amount = events.map(event =>{
-            const numeros = event.amount;
+            const numeros = event.ingresos;
             
-            //   numeros.forEach(item =>{
-                //      suma += item;
-                //   });
+            
+            if( numeros ){
                 
+                return  numeros ;
+            } else {
+                return 0;
+            }
                 
-                return numeros;
             })
-            console.log(amount);
+            // console.log(amount);
         
         // const numeros = events.amount;
         amount.forEach(item =>{
@@ -100,14 +102,43 @@ export const useCalendarStore = () => {
         
          
         return suma;
-
-        
-
-
     }
   
-  
+    const startMoreExpense = () => {
+        let suma = 0;
+        const amount = events.map(event =>{
+            const numeros = event.gastos;
+            
+            
+            if( numeros ){
+                
+                return  numeros ;
+            } else {
+                return 0;
+            }
+                
+            })
+            // console.log(amount);
+        
+        // const numeros = events.amount;
+        amount.forEach(item =>{
+            suma += item;
+        });
+        
+         
+        return suma;
+    }
 
+    const startBalance = () => {
+        const income = startMoreIncome();
+        const expense = startMoreExpense();
+       
+       return  income - expense;
+        
+       
+        
+         
+    }
 
     return {
         //* Propiedades
@@ -121,6 +152,8 @@ export const useCalendarStore = () => {
         setActiveEvent,
         startSavingEvent,
         startLoadingEvents,
-        startMoreIncome
+        startMoreIncome,
+        startMoreExpense,
+        startBalance 
     }
 }
