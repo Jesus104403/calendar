@@ -3,14 +3,14 @@
 export const CalendarEvent = ({ event }) => {
 
     
-    const { amount, user } = event;
+    const { amount, user,notes } = event;
 
    
 
     return (
         <>
             <strong>{ amount  }</strong>
-            <span> - { user.name }</span>
+            <span>  { notes }</span>
         </>
     )
 }

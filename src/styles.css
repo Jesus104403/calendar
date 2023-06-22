@@ -240,11 +240,12 @@ margin-top: 5px;
 .graphBox
 {
   position: relative;
-  width: 100%;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr ;
-  min-height: 200px;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  /* margin-top: 10px; */
+  
+  
 }
 
 
@@ -252,8 +253,10 @@ margin-top: 5px;
 {
   position: relative;
   background: #fff;
-  padding: 20px;
-  width: 100%;
+  width: 600px;
+  height: 550px;
+  padding: 100px;
+
   box-shadow: 0 7px 25px rgba(0,0,0,0.08);
   border-radius: 20px;
 }
@@ -266,9 +269,12 @@ margin-top: 5px;
   width: 100%;
   padding: 20px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 30px;
-  /* margin-top: 10px; */
+  margin-left: 5px;
+  /* margin-right: 50px; */
+  /* grid-template-columns: 2fr 1fr; */
+  /* grid-gap: 10px;
+  margin-top: 10px; */
+  
 
 }
 
@@ -276,7 +282,7 @@ margin-top: 5px;
 {
   position: relative;
   display: grid;
-  min-height: 500px;
+  min-height: 100px;
   background: white;
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0,0,0,0.08);

@@ -134,9 +134,6 @@ export const useCalendarStore = () => {
         const expense = startMoreExpense();
        
        return  income - expense;
-        
-       
-        
          
     }
 

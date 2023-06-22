@@ -1,6 +1,7 @@
 import {useMemo} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { useCalendarStore } from '../../hooks';
 
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -9,7 +10,8 @@ const scores = [12, 19, 3, 5];
 const labels = ['Shopping', 'Family', 'Food & Drink', 'Transportation'];
 
 const options = {
-    responsive: false,
+    responsive: true,
+   
 }
 
 export default function DoughnutChart() {
@@ -33,6 +35,7 @@ export default function DoughnutChart() {
                       ],
                       borderWidth: 1,
                 }
+                
             ],
 
          labels,

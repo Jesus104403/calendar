@@ -198,7 +198,7 @@ export const CalendarModal = () => {
                     value={ formValues.amount }
                     onChange={ onInputChanged }
                 />
-                <small id="emailHelp" className="form-text text-muted">Description(Optional) </small>
+                <small id="emailHelp" className="form-text text-muted">Categoria </small>
             </div>
 
             <div className="form-group mb-2">
