@@ -137,6 +137,32 @@ export const useCalendarStore = () => {
          
     }
 
+    const showResults = () => {
+        const amount = events.map(event =>{
+            const ingresos = event.ingresos;
+            console.log(ingresos);
+          
+            return ingresos;
+        
+        });
+        
+        return amount;
+         
+    }
+
+    const showNotes = () => {
+        const amount = events.map(event =>{
+            const notes = event.notes;
+            console.log(notes);
+          
+            return notes;
+        
+        });
+        
+        return amount;
+         
+    }
+
     return {
         //* Propiedades
         activeEvent,
@@ -151,6 +177,8 @@ export const useCalendarStore = () => {
         startLoadingEvents,
         startMoreIncome,
         startMoreExpense,
-        startBalance 
+        startBalance,
+        showResults,
+        showNotes,
     }
 }

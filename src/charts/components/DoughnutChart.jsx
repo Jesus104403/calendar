@@ -6,8 +6,6 @@ import { useCalendarStore } from '../../hooks';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const scores = [12, 19, 3, 5];
-const labels = ['Shopping', 'Family', 'Food & Drink', 'Transportation'];
 
 const options = {
     responsive: true,
@@ -15,6 +13,11 @@ const options = {
 }
 
 export default function DoughnutChart() {
+   const { showResults, showNotes } = useCalendarStore();
+   console.log( showResults() );
+   const scores = showResults();
+   const labels = showNotes();
+
    const data = useMemo(function () {
         return {
             datasets: [
