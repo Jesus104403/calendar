@@ -60,7 +60,7 @@ export const Navbar = () => {
             <div className="call">
             <i className="fa-solid fa-square-poll-vertical"></i>
                &nbsp;
-                <span>Saldo</span>
+                <span>Balance</span>
             </div>      
         </div>
       

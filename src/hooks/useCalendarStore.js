@@ -139,10 +139,9 @@ export const useCalendarStore = () => {
 
     const showResults = () => {
         const amount = events.map(event =>{
-            const ingresos = event.ingresos;
-            console.log(ingresos);
-          
-            return ingresos;
+            const gastos = event.gastos;
+            console.log(gastos);
+            return gastos;
         
         });
         
@@ -151,15 +150,16 @@ export const useCalendarStore = () => {
     }
 
     const showNotes = () => {
-        const amount = events.map(event =>{
-            const notes = event.notes;
+        const amount = events.filter( event => event.gastos );
+            
+        const amountNotes = amount.map( amount => {
+            const notes = amount.notes;
             console.log(notes);
-          
-            return notes;
-        
-        });
-        
-        return amount;
+            return notes
+        })
+    
+       
+         return amountNotes;
          
     }
 
