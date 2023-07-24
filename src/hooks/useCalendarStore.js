@@ -138,14 +138,25 @@ export const useCalendarStore = () => {
     }
 
     const showResults = () => {
-        const amount = events.map(event =>{
-            const gastos = event.gastos;
+
+         const amount = events.filter( event => event.gastos );
+            
+        const amountNotes = amount.map( amount => {
+            const gastos = amount.gastos;
             console.log(gastos);
-            return gastos;
+            return gastos
+        })
+    
+       
+         return amountNotes;
+        // const amount = events.map(event =>{
+        //     const gastos = event.gastos;
+        //     console.log(gastos);
+        //     return gastos;
         
-        });
+        // });
         
-        return amount;
+        // return amount;
          
     }
 
@@ -161,6 +172,14 @@ export const useCalendarStore = () => {
        
          return amountNotes;
          
+        // const amount = events.map(event =>{
+        //     const notes = event.notes;
+        //     console.log(notes);
+        //     return notes;
+        
+        // });
+        
+        // return amount;
     }
 
     return {
