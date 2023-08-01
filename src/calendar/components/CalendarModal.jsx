@@ -126,17 +126,20 @@ export const CalendarModal = () => {
         
         if ( toggled === true){
             console.log(   newFormValues );
-            return await startSavingEvent(  newFormValues );
+            await startSavingEvent(  newFormValues ); 
+            closeDateModal();
+            return;
         }else{
             console.log(   newFormValues2 );
             await startSavingEvent(  newFormValues2 );
+            closeDateModal();
         }
     
 
         // TODO: 
         // await startSavingEvent(  newFormValues );
-        closeDateModal();
-        setFormSubmitted(false);
+        // closeDateModal();
+        // setFormSubmitted(false);
     }
 
    
@@ -156,7 +159,7 @@ export const CalendarModal = () => {
             <hr />
 
          </div>
-            <p>The switch is {toggled ? 'on' : 'off'}.</p>
+            {/* <p>The switch is {toggled ? 'on' : 'off'}.</p> */}
         <form className="container" onSubmit={ onSubmit }>
 
             <div className="form-group mb-2">
